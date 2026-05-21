@@ -1,0 +1,23 @@
+{
+  "id": "storyboard-demo",
+  "name": "Prompt to Rendered Video",
+  "nodes": [
+    { "id": "prompt", "type": "prompt", "data": { "prompt": "Cyberpunk city chase sequence" } },
+    { "id": "enhancer", "type": "api_request", "data": { "url": "https://api.example.com/prompt-enhance", "method": "POST", "body": { "style": "cinematic" } } },
+    { "id": "storyboard", "type": "api_request", "data": { "url": "https://api.example.com/storyboard", "method": "POST" } },
+    { "id": "image", "type": "api_request", "data": { "url": "https://api.example.com/image-generate", "method": "POST" } },
+    { "id": "video", "type": "api_request", "data": { "url": "https://api.example.com/image-to-video", "method": "POST" } },
+    { "id": "voice", "type": "api_request", "data": { "url": "https://api.example.com/voice", "method": "POST" } },
+    { "id": "subtitles", "type": "api_request", "data": { "url": "https://api.example.com/subtitles", "method": "POST" } },
+    { "id": "export", "type": "api_request", "data": { "url": "https://api.example.com/ffmpeg-export", "method": "POST" } }
+  ],
+  "edges": [
+    { "id": "e1", "source": "prompt", "target": "enhancer" },
+    { "id": "e2", "source": "enhancer", "target": "storyboard" },
+    { "id": "e3", "source": "storyboard", "target": "image" },
+    { "id": "e4", "source": "image", "target": "video" },
+    { "id": "e5", "source": "video", "target": "voice" },
+    { "id": "e6", "source": "voice", "target": "subtitles" },
+    { "id": "e7", "source": "subtitles", "target": "export" }
+  ]
+}
