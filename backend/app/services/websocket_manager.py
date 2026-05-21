@@ -19,7 +19,10 @@ class WebSocketManager:
         sockets = list(self._rooms[run_id])
         payload = orjson.dumps(event).decode()
         for ws in sockets:
-            await ws.send_text(payload)
+            try:
+                await ws.send_text(payload)
+            except Exception:
+                self.disconnect(run_id, ws)
 
 
 ws_manager = WebSocketManager()
